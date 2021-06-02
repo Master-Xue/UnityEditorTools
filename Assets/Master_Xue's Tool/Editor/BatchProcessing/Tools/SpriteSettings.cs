@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEngine;
 
-public class SpriteSettings : Editor
+public class SpriteSettings : EditorWindow
 {
 
 
@@ -33,7 +33,7 @@ public class SpriteSettings : Editor
             for (int j = 0; j < picPahtList.Count; j++)
             {
                 string path = picPahtList[j];
-                EditorUtility.DisplayProgressBar(string.Format("正在设置精灵:{0}/{1}", i + 1, filePathList.Count), path, (j + 1) / picPahtList.Count);
+                //EditorUtility.DisplayProgressBar("正在设置精灵图片", path, j/picPahtList.Count);
                 string tag = "";
                 if (tagList != null && tagList.Count > 0)
                     tag = tagList[i];
@@ -80,19 +80,13 @@ public class SpriteSettings : Editor
 
                 AssetDatabase.ImportAsset(path);
             }
-
         }
-        EditorUtility.ClearProgressBar();
+        //EditorUtility.ClearProgressBar();
     }
 
-    ////获取导入图片的宽高
-    //(int, int) GetTextureImporterSize(TextureImporter importer)
-    //{
-    //    if (importer != null)
-    //    {
+    private void OnGUI()
+    {
+        
+    }
 
-    //        return ((int)args[0], (int)args[1]);
-    //    }
-    //    return (0, 0);
-    //}
 }
