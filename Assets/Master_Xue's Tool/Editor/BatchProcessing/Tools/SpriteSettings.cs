@@ -30,9 +30,10 @@ public class SpriteSettings : Editor
         {
             CurrentCount = 0;
             List<string> picPahtList = DataTools.FindObjPathWithType("texture", filePathList);
-            foreach (var path in picPahtList)
+            for (int j = 0; j < picPahtList.Count; j++)
             {
-                Debug.Log(path);
+                string path = picPahtList[j];
+                EditorUtility.DisplayProgressBar(string.Format("正在设置精灵:{0}/{1}", i + 1, filePathList.Count), path, (j + 1) / picPahtList.Count);
                 string tag = "";
                 if (tagList != null && tagList.Count > 0)
                     tag = tagList[i];
@@ -81,7 +82,7 @@ public class SpriteSettings : Editor
             }
 
         }
-
+        EditorUtility.ClearProgressBar();
     }
 
     ////获取导入图片的宽高
