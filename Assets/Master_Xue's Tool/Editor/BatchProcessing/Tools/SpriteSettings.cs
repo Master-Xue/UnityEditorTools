@@ -29,11 +29,12 @@ public class SpriteSettings : EditorWindow
         for (int i = 0; i < filePathList.Count; i++)
         {
             CurrentCount = 0;
-            List<string> picPahtList = DataTools.FindObjPathWithType("texture", filePathList);
+            List<string> picPahtList = DataTools.FindObjPathWithType("texture", filePathList[i]);
             for (int j = 0; j < picPahtList.Count; j++)
             {
                 string path = picPahtList[j];
-                //EditorUtility.DisplayProgressBar("正在设置精灵图片", path, j/picPahtList.Count);
+                Debug.Log(path);
+                EditorUtility.DisplayProgressBar(string.Format("正在设置精灵图片:{0}/{1}",i+1,filePathList.Count), path, 1.0f / picPahtList.Count * j);
                 string tag = "";
                 if (tagList != null && tagList.Count > 0)
                     tag = tagList[i];
@@ -81,12 +82,12 @@ public class SpriteSettings : EditorWindow
                 AssetDatabase.ImportAsset(path);
             }
         }
-        //EditorUtility.ClearProgressBar();
+        EditorUtility.ClearProgressBar();
     }
 
     private void OnGUI()
     {
-        
+
     }
 
 }

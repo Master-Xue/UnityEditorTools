@@ -24,20 +24,20 @@ public class Data
 
     public static string assetPath = "";
 
-    
+
 }
 
 public enum EPictureSize
 {
-    _32=32,
-    _64=64,
-    _128=128,
-    _256=256,
-    _512=512,
-    _1024=1024,
-    _2048=2048,
-    _4096=4096,
-    _8192=8192
+    _32 = 32,
+    _64 = 64,
+    _128 = 128,
+    _256 = 256,
+    _512 = 512,
+    _1024 = 1024,
+    _2048 = 2048,
+    _4096 = 4096,
+    _8192 = 8192
 }
 
 public enum EPicturePlatform
@@ -46,7 +46,7 @@ public enum EPicturePlatform
     WebGL,
     iPhone,
     Android
-    
+
 }
 
 public class DataTools
@@ -80,6 +80,29 @@ public class DataTools
         }
         return pathList;
     }
+    public static List<string> FindObjPathWithType(string type, string floderName)
+    {
+        List<string> pathList = new List<string>();
+        floderName = FloderToPath(floderName);
+        //string[] s = type.Split('|');
+        //for (int i = 0; i < s.Length; i++)
+        //{
+        //    string[] guids = AssetDatabase.FindAssets("t:" + s[i], floderName.ToArray());
+        //    Debug.Log(s[i] + guids.Length);
+        //    foreach (var guid in guids)
+        //    {
+        //        string path = AssetDatabase.GUIDToAssetPath(guid);
+        //        pathList.Add(path);
+        //    }
+        //}
+        string[] guids = AssetDatabase.FindAssets("t:" + type, new string[] { floderName });
+        foreach (var guid in guids)
+        {
+            string path = AssetDatabase.GUIDToAssetPath(guid);
+            pathList.Add(path);
+        }
+        return pathList;
+    }
 
     static List<string> FloderToPath(List<string> floderName)
     {
@@ -92,6 +115,12 @@ public class DataTools
             name.Add(floderName[i].Insert(0, "Assets/"));
         }
         return name;
+    }
+    static string FloderToPath(string floderName)
+    {
+        if (string.IsNullOrEmpty(floderName))
+            return "";
+        return floderName.Insert(0, "Assets/");
     }
 
     #region 旧方法

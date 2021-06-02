@@ -6,8 +6,7 @@ using System.IO;
 
 public class PictureSettings : Editor
 {
-
-
+    
     public static void SetPicture(List<string> flodList, TextureImporter importPre)
     {
         List<string> picPahtList = DataTools.FindObjPathWithType("texture", flodList);
